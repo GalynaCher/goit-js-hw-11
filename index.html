@@ -9,8 +9,14 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/vineethtrv/css-loader/css-loader.min.css"
+    />
     <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
-    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-d11d8ad1.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-8c59ed88.js">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-1cd1f9d9.css">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-591f6124.css">
   </head>
   <body>
     <section class="search-section">
@@ -23,10 +29,12 @@
         <button class="search-block-button">Search</button>
       </div>
     </section>
-
-    
-    <!-- temporary ? -->
-    
+    <div class="search-results">
+      <span class="loader"></span>
+      <ul class="gallery-ul">
+        <!-- gallery.insertAdjacentHTML("afterbegin", markup) -->
+      </ul>
+    </div>
     
   </body>
 </html>
