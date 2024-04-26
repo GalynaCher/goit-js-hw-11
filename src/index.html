@@ -9,6 +9,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/vineethtrv/css-loader/css-loader.min.css"
+    />
   </head>
   <body>
     <section class="search-section">
@@ -21,10 +25,12 @@
         <button class="search-block-button">Search</button>
       </div>
     </section>
-
+    <div class="search-results">
+      <span class="loader"></span>
+      <ul class="gallery-ul">
+        <!-- gallery.insertAdjacentHTML("afterbegin", markup) -->
+      </ul>
+    </div>
     <script type="module" src="./main.js"></script>
-    <!-- temporary ? -->
-    <script type="module" src="./js/pixabay-api.js"></script>
-    <script type="module" src="./js/render-functions.js"></script>
   </body>
 </html>
