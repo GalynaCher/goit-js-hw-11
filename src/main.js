@@ -24,6 +24,7 @@ searchFld.addEventListener("input", () => {
 searchBtn.addEventListener("click", () => { 
     // Search field cannot be empty
     if (searchCriteria.trim()) {
+        gallery.innerHTML = "";
         fetchImages(searchCriteria)
             .then(response => { 
                 // Clear Search field           
@@ -38,8 +39,8 @@ searchBtn.addEventListener("click", () => {
                         title: 'Error',
                         message: 'Sorry, there are no images matching your search query. Please try again!'
                     });
+                    
                     searchCriteria = '';
-                    gallery.innerHTML = "";
                     return;
                 };
                 loader.style.display = 'block';
