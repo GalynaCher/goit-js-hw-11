@@ -6,6 +6,15 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 // strict mode
 'use strict'
 
+const lightbox = new SimpleLightbox(".gallery a", {                   // the simpleLightbox pattern
+        captions: true,                                            // show captions if availabled or not
+        captionSelector: 'img',                                    // set the element where the caption is
+        captionsData: 'alt',                                       // get the caption from given attribute
+        captionPosition: 'bottom',                                        
+        captionDelay: 250,                                         // delay before the caption shows (in ms)
+        captionType: 'attr'                                        // how to get the caption.                                                                  // You can choose between attr, data or text
+    });
+
 export function renderImagesByPages(dataHit) { 
     
     let gallery = document.querySelector("ul.gallery-ul");
@@ -41,18 +50,9 @@ export function renderImagesByPages(dataHit) {
                     </li>`
             )
             .join("");
-        
+    // Display the gallery    
     gallery.insertAdjacentHTML("afterbegin", markup);
     
-    gallery = new SimpleLightbox(".gallery a", {                   // the simpleLightbox pattern
-        captions: true,                                            // show captions if availabled or not
-        captionSelector: 'img',                                    // set the element where the caption is
-        captionsData: 'alt',                                       // get the caption from given attribute
-        captionPosition: 'bottom',                                        
-        captionDelay: 250,                                         // delay before the caption shows (in ms)
-        captionType: 'attr'                                        // how to get the caption.                                                                  // You can choose between attr, data or text
-    });
-    
-    gallery.refresh();
+    lightbox.refresh();
 
 }

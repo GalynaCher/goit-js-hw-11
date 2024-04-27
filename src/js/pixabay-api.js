@@ -1,12 +1,12 @@
 // strict mode
 'use strict'
 
-export function fetchImages(searchCriteria, pageNum) {
+export function fetchImages(searchCriteria) {
  
     const searchParams = new URLSearchParams({
         key: "43557588-360f3c0dbe3221038cf66573a",
         q: searchCriteria,
-        page: pageNum,
+        // page: pageNum,
         image_type: "photo",
         orientation: "horizontal", 
         safesearch: true 

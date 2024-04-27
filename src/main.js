@@ -15,69 +15,57 @@ const loader = document.querySelector(".loader");
 let gallery = document.querySelector("ul.gallery-ul");
 
 let searchCriteria = '';
-let pageNum;
 
 searchFld.addEventListener("input", () => { 
     searchCriteria = searchFld.value;
 });
 
 searchBtn.addEventListener("click", () => { 
+    // Display loader
+    loader.style.display = 'block';
     // Search field cannot be empty
     if (searchCriteria.trim()) {
+        // Clear the gallery
         gallery.innerHTML = "";
         fetchImages(searchCriteria)
             .then(response => { 
                 // Clear Search field           
                 searchFld.value = '';
-                // Parse the JSON response
+                // Return JSON object
                 return response.json();
             })
             .then(data => {
                 // Check if the total number of items is 0
-                if (data.total === 0) { 
+                if (data.total === 0) {
                     iziToast.error({
                         title: 'Error',
                         message: 'Sorry, there are no images matching your search query. Please try again!'
                     });
-                    
+                    // Hide loader
+                    loader.style.display = 'none';
                     searchCriteria = '';
                     return;
+                } else { 
+                    // Return data.hits;
+                    renderImagesByPages(data.hits.flat());
+                    // Hide loader
+                    loader.style.display = 'none';
+                    searchCriteria = '';                   
                 };
-                loader.style.display = 'block';
-                const totalImages = data.total;
-                // Don't know yet how to process a large number of pages (next module),
-                // so I limited the number of pages to 5
-                // const totalPages = Math.ceil(totalImages / 20);
-                const totalPages = 5;
-                const promises = [];
-
-                for (pageNum = 1; pageNum <= totalPages; pageNum++) { 
-
-                    promises.push(fetchImages(searchCriteria, pageNum)
-                        .then(response => response.json())
-                        .then(data => {
-                            return data.hits;
-                        }))
-                };
-
-                Promise.all(promises)
-                    .then(results => {
-                        // console.log("results.flat", results.flat());
-                        renderImagesByPages(results.flat());
-                        loader.style.display = 'none';
-                        searchCriteria = '';
-                    })
-                    .catch(error => console.log(error))
-            })
+            })          
             .catch(error => console.error(error));
     } else { 
         iziToast.error({
             title: 'Error',
             message: 'Search field cannot be empty'
         });
+        // Clear gallery content to avoid mixing query results
         gallery.innerHTML = "";
+        // Hide loader
+        loader.style.display = 'none';
         return;
     }
 });
+
 
 
